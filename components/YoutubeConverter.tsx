@@ -70,11 +70,14 @@ export const YoutubeTranscriptGenerator = () => {
         return;
       }
 
-      const { text } = await generateYoutubeTranscript({
+      const { textStream } = await generateYoutubeTranscript({
         videoId,
         targetLanguage: selectedLanguage,
       });
-      setContent(text);
+
+      for await (const textPart of textStream) {
+        setContent((text) => text + textPart);
+      }
     } catch (error: Error | unknown) {
       const errorMessage =
         error instanceof Error ? error.message : "An unknown error occurred";
