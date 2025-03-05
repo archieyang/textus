@@ -12,7 +12,8 @@ interface GetCaptionsParams {
   videoId: string;
 }
 
-export async function getCaptionsFromYoutube({
+// 函数名称优化
+export async function generateYoutubeTranscript({
   targetLanguage,
   videoId,
 }: GetCaptionsParams) {

@@ -1,53 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+  
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --primary: #6366f1;
-  --primary-foreground: #e0e7ff;
-  --secondary: #64748b;
-  --secondary-foreground: #f1f5f9;
-  --radius: 0.75rem;
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --main: #ff6b6b;
+  --overlay: rgba(0, 0, 0, 0.8); /* background color overlay for alert dialogs, modals, etc. */
+
+  --bg: #fcd7d7;
+  --bw: #fff; /* white and secondary black e.g. utility class variant would be: bg-[#fff] dark:bg-[#212121] */
+  --blank: #000; /* blank black and white */
+  --border: #000;
+  --text: #000;
+  --mtext: #000; /* text that is placed on background with main color e.g. text color of default button */
+  --ring: #000;
+  --ring-offset: #fff;
+
+  --border-radius: 5px;
+  --box-shadow-x: 4px;
+  --box-shadow-y: 4px;
+  --reverse-box-shadow-x: -4px;
+  --reverse-box-shadow-y: -4px;
+  --base-font-weight: 500;
+  --heading-font-weight: 700;
+
+  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #e2e8f0;
-    --primary: #818cf8;
-    --primary-foreground: #1e1b4b;
-    --secondary: #475569;
-    --secondary-foreground: #f8fafc;
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.25);
-  }
-}
+.dark {
+  --bg: #272933;
+  --bw: #212121;
+  --blank: #fff;
+  --border: #000;
+  --text: #e6e6e6;
+  --mtext: #000;
+  --ring: #fff;
+  --ring-offset: #000;
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-    'Helvetica Neue', Arial, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-@layer components {
-  .animate-gradient-border {
-    background-image: linear-gradient(
-      45deg,
-      var(--primary),
-      var(--secondary),
-      var(--primary)
-    );
-    background-size: 300% 300%;
-    animation: gradient-shift 8s ease infinite;
-  }
-
-  @keyframes gradient-shift {
-    0% { background-position: 0% 50% }
-    50% { background-position: 100% 50% }
-    100% { background-position: 0% 50% }
-  }
+  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
 }
