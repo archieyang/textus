@@ -132,10 +132,7 @@ export const YoutubeTranscriptGenerator = () => {
       {content && (
         <div className="mt-6">
           <ScrollArea className="h-[400px] w-full max-w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main p-4 shadow-shadow">
-            <Markdown>
-              `No information is available for the provided query. Please ensure
-              the query is correct or provide additional context.`
-            </Markdown>
+            <Markdown>{content}</Markdown>
           </ScrollArea>
           <div className="mt-2 flex justify-center">
             <CopyButton content={content} />
