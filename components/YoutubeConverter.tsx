@@ -136,7 +136,7 @@ export const YoutubeTranscriptGenerator = () => {
       {content && (
         <div className="mt-6">
           <ScrollArea className="h-[400px] w-full sm:w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main shadow-shadow">
-            <div className="w-full m-8">
+            <div className="w-full px-8 sm:px-12 py-6 sm:py-8">
               <Markdown>{content}</Markdown>
             </div>
           </ScrollArea>
