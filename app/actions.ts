@@ -42,11 +42,11 @@ export async function generateYoutubeTranscript({
     const { text } = await generateText({
       model: openrouter("google/gemini-2.0-flash-thinking-exp:free"),
       prompt: `You are a professional translator. Translate the following text to ${targetLanguage}. Requirements:
-1. Maintain the original meaning and style
-2. Keep the translation natural and fluent
-3. Preserve any technical terms accurately
-4. Format the output as a coherent article
-5. Output translation directly without explanations
+1. Use appropriate headings and paragraphs
+2. Maintain natural flow and readability
+3. Preserve speaker identification if present
+4. Ensure proper spacing and indentation
+5. Output translation directly without explanations or meta text
 
 Text to translate:
 ${data.transcript}`,

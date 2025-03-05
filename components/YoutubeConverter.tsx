@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { generateYoutubeTranscript } from "@/app/actions";
-import Markdown from "react-markdown";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
@@ -132,7 +131,7 @@ export const YoutubeTranscriptGenerator = () => {
       {content && (
         <div className="mt-6">
           <ScrollArea className="h-[400px] w-full max-w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main p-4 shadow-shadow">
-            <Markdown>{content}</Markdown>
+            {content}
           </ScrollArea>
           <div className="mt-2 flex justify-center">
             <CopyButton content={content} />
