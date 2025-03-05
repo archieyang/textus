@@ -52,14 +52,11 @@ export const YoutubeConverter = () => {
         return;
       }
 
-      const { textStream } = await getCaptionsFromYoutube({
+      const { text } = await getCaptionsFromYoutube({
         videoId,
         targetLanguage: selectedLanguage,
       });
-
-      for await (const textPart of textStream) {
-        setContent((prevContent) => prevContent + textPart);
-      }
+      setContent(text)
     } catch (error: Error | unknown) {
       const errorMessage =
         error instanceof Error

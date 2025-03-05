@@ -1,7 +1,7 @@
 "use server";
 
 import { openrouter } from "@openrouter/ai-sdk-provider";
-import { streamText } from "ai";
+import { generateText } from "ai";
 
 interface TranscriptResponse {
   transcript: string;
@@ -38,12 +38,20 @@ export async function getCaptionsFromYoutube({
     const data: TranscriptResponse = await response.json();
 
     // 使用 OpenRouter 处理字幕内容
-    const { textStream } = await streamText({
+    const { text } = await generateText({
       model: openrouter("google/gemini-2.0-flash-thinking-exp:free"),
-      prompt: `Translate the following text to ${targetLanguage}. Format the translation as a coherent article. Output the translation directly without any prefixes or explanations:\n\n${data.transcript}`,
+      prompt: `You are a professional translator. Translate the following text to ${targetLanguage}. Requirements:
+1. Maintain the original meaning and style
+2. Keep the translation natural and fluent
+3. Preserve any technical terms accurately
+4. Format the output as a coherent article
+5. Output translation directly without explanations
+
+Text to translate:
+${data.transcript}`,
     });
 
-    return { textStream };
+    return { text };
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Error processing captions: ${error.message}`);
