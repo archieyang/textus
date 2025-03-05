@@ -9,13 +9,13 @@ interface TranscriptResponse {
 
 interface GetCaptionsParams {
   targetLanguage: string;
-  videoId: string;
+  url: string;
 }
 
 // 函数名称优化
 export async function generateYoutubeTranscript({
   targetLanguage,
-  videoId,
+  url,
 }: GetCaptionsParams) {
   try {
     const response = await fetch(
@@ -26,7 +26,7 @@ export async function generateYoutubeTranscript({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          video_id: videoId,
+          video_id: url,
           format: true,
         }),
       }

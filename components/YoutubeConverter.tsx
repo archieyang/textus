@@ -58,11 +58,7 @@ export const YoutubeTranscriptGenerator = () => {
     setContent("");
 
     try {
-      const videoId = url.match(
-        /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/
-      )?.[1];
-
-      if (!videoId) {
+      if (!url) {
         toast({
           title: "Invalid URL",
           description: "Please enter a valid YouTube video URL",
@@ -72,12 +68,17 @@ export const YoutubeTranscriptGenerator = () => {
       }
 
       const { textStream } = await generateYoutubeTranscript({
-        videoId,
+        url,
         targetLanguage: selectedLanguage,
       });
+      const reader = textStream.getReader();
 
-      for await (const textPart of textStream) {
-        setContent((text) => text + textPart);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        setContent((text) => text + value);
       }
     } catch (error: Error | unknown) {
       const errorMessage =
@@ -94,8 +95,11 @@ export const YoutubeTranscriptGenerator = () => {
   };
 
   return (
-    <div className="w-full mx-auto p-6 max-w-4xl">
-      <form onSubmit={handleSubmit} className="space-y-4  w-96 mx-auto">
+    <div className="w-full mx-auto p-4 sm:p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-4 w-full sm:w-96 mx-auto"
+      >
         <Input
           type="text"
           value={url}
@@ -131,8 +135,10 @@ export const YoutubeTranscriptGenerator = () => {
 
       {content && (
         <div className="mt-6">
-          <ScrollArea className="h-[400px] w-full max-w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main p-4 shadow-shadow">
-            <Markdown>{content}</Markdown>
+          <ScrollArea className="h-[400px] w-full sm:w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main shadow-shadow">
+            <div className="w-full m-8">
+              <Markdown>{content}</Markdown>
+            </div>
           </ScrollArea>
           <div className="mt-2 flex justify-center">
             <CopyButton content={content} />
