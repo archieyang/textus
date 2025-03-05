@@ -95,10 +95,7 @@ export const YoutubeTranscriptGenerator = () => {
 
   return (
     <div className="w-full mx-auto p-6 max-w-4xl">
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-4  max-w-[600px] mx-auto"
-      >
+      <form onSubmit={handleSubmit} className="space-y-4  w-96 mx-auto">
         <Input
           type="text"
           value={url}
