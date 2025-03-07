@@ -15,6 +15,7 @@ import {
 import { CopyButton } from "./CopyButton";
 import { useToast } from "@/hooks/use-toast";
 import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const languages = {
   Arabic: "Arabic",
@@ -136,13 +137,15 @@ export const YoutubeTranscriptGenerator = () => {
       {content && (
         <div className="mt-6">
           <ScrollArea className="h-[400px] w-full sm:w-[600px] mx-auto rounded-base text-mtext border-2 border-border bg-main shadow-shadow">
-            <div className="w-full px-8 sm:px-12 py-6 sm:py-8">
-              <Markdown>{content}</Markdown>
+            <div className="w-full px-8 sm:px-12 py-6 sm:py-8 prose-invert prose-sm dark:prose-invert prose-headings:mb-3 prose-p:mb-2">
+              <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
             </div>
           </ScrollArea>
-          <div className="mt-2 flex justify-center">
-            <CopyButton content={content} />
-          </div>
+          {!isLoading && (
+            <div className="mt-2 flex justify-center">
+              <CopyButton content={content} />
+            </div>
+          )}
         </div>
       )}
     </div>
