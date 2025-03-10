@@ -40,7 +40,7 @@ export async function generateYoutubeTranscript({
 
     // 使用 OpenRouter 处理字幕内容
     const { textStream } = streamText({
-      model: openrouter("google/gemini-2.0-flash-thinking-exp:free"),
+      model: openrouter("google/gemini-2.0-flash-lite-001"),
       prompt: `You are a professional translator. Translate the following text to ${targetLanguage}. Requirements:
 1. Use appropriate headings and paragraphs
 2. Maintain natural flow and readability
